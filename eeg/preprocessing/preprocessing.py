@@ -93,7 +93,7 @@ ica.exclude = []
 reconst_raw.set_eeg_reference(ref_channels='average')
 
 # Epoch cleaned data around the start of the track (-0.4 seconds before and 6 seconds after) for time frequency analysis
-# These segments will be re-defined and truncated again later to form epochs for each pillar
+# These segments are only for testing how well the cleaning worked and will not be saved
 epochs = mne.Epochs(reconst_raw, events, event_id, tmin=-.4, tmax=6, baseline=None, preload=True, on_missing='ignore')
 
 # Reject artifact epochs by first setting ampltiude criteria
@@ -105,4 +105,3 @@ epochs.plot_drop_log()
 
 # Save data
 reconst_raw.save('file_directory/raw/sub' + sub + '-raw.fif', overwrite=True)
-epochs.save('file_directory/epochs/sub' + sub + '-epo.fif', overwrite=True)
