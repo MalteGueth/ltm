@@ -7,9 +7,7 @@ import numpy as np
 # The logic for re-coding will be to build running variables that keep track of previous events within a trial.
 
 # Build a list of strings for all used subjects
-subs = [str(x) for x in np.arange(1,34)]
-subs.remove('21')
-subs.remove('27')
+subs = []
 
 # The task events in the eprime code do not directly reflect which events during the recall
 # were the reward pillar during the previous encoding stage and whether those were correctly identified.
