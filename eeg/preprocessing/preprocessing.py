@@ -20,7 +20,7 @@ raw.set_montage(montage=montage, on_missing='ignore')
 raw.set_channel_types({'LHEOG': 'eog', 'RHEOG': 'eog', 'VEOG': 'eog'})
 
 # For an overview of the sensor maps, plot topographies for EEG
-raw.plot_sensors(kind='topomap', show_names=True, title='26 channel EEG montage');
+raw.plot_sensors(kind='topomap', show_names=True, title='32 channel EEG montage');
 
 events, event_dict = mne.events_from_annotations(raw)
 fig = mne.viz.plot_events(events)
