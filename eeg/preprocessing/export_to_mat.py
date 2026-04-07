@@ -35,22 +35,22 @@ for sub in subs:
     norew5 = norew5.reshape((int(norew5.shape[0]/5001)), 5001, 28)
 
     # Save the data array as a mat file and re-arrange the dimensions, so that it is channels by samples by trials
-    sio.savemat(path + export/sub' + sub + '_reward1.mat',
+    sio.savemat(path + 'export/sub' + sub + '_reward1.mat',
                 mdict={'epochs': np.moveaxis(rew1, [0, 1, 2], [-1, 1, 0])},)
-    sio.savemat(path + export/sub' + sub + '_reward2.mat',
+    sio.savemat(path + 'export/sub' + sub + '_reward2.mat',
                 mdict={'epochs': np.moveaxis(rew2, [0, 1, 2], [-1, 1, 0])},)
-    sio.savemat(path + export/sub' + sub + '_reward3.mat',
+    sio.savemat(path + 'export/sub' + sub + '_reward3.mat',
                 mdict={'epochs': np.moveaxis(rew3, [0, 1, 2], [-1, 1, 0])},)
-    sio.savemat(path + export/sub' + sub + '_reward4.mat',
+    sio.savemat(path + 'export/sub' + sub + '_reward4.mat',
                 mdict={'epochs': np.moveaxis(rew4, [0, 1, 2], [-1, 1, 0])},)
-    sio.savemat(path + export/sub' + sub + '_reward5.mat',
+    sio.savemat(path + 'export/sub' + sub + '_reward5.mat',
                 mdict={'epochs': np.moveaxis(rew5, [0, 1, 2], [-1, 1, 0])},)
-    sio.savemat(path + export/sub' + sub + '_noreward1.mat',
+    sio.savemat(path + 'export/sub' + sub + '_noreward1.mat',
                 mdict={'epochs': np.moveaxis(norew1, [0, 1, 2], [-1, 1, 0])},)
-    sio.savemat(path + export/sub' + sub + '_noreward2.mat',
+    sio.savemat(path + 'export/sub' + sub + '_noreward2.mat',
                 mdict={'epochs': np.moveaxis(norew2, [0, 1, 2], [-1, 1, 0])},)
-    sio.savemat(path + export/sub' + sub + '_noreward3.mat',
+    sio.savemat(path + 'export/sub' + sub + '_noreward3.mat',
                 mdict={'epochs': np.moveaxis(norew3, [0, 1, 2], [-1, 1, 0])},)
-    sio.savemat(path + export/sub' + sub + '_noreward4.mat',
+    sio.savemat(path + 'export/sub' + sub + '_noreward4.mat',
                 mdict={'epochs': np.moveaxis(norew4, [0, 1, 2], [-1, 1, 0])},)
-    sio.savemat(path + export/sub' + sub + '_noreward5.mat',
+    sio.savemat(path + 'export/sub' + sub + '_noreward5.mat',
