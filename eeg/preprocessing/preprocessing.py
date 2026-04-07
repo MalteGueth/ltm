@@ -6,8 +6,8 @@ import mne
 from mne.preprocessing import ICA
 
 # Set the directory and file name
-data_folder = 'file_directory/raw/'
-raw_file = os.path.join(data_folder, 'filename.vhdr')
+path = 'file_directory/'
+raw_file = os.path.join(path, 'raw', 'filename.vhdr')
 
 # Read the first file and create a montage with EOG channels as before
 raw = mne.io.read_raw_brainvision(sample_data_eeg, preload=True)
@@ -33,7 +33,7 @@ fig = mne.viz.plot_events(events, raw.info['sfreq'],
                           event_id=event_id, first_samp=raw.first_samp)
 
 # Save event array
-mne.write_events('file_directory/events/' + sub + '-eve.fif', events)
+mne.write_events(path + 'events/' + sub + '-eve.fif', events)
 
 # Bandpass filter data between 0.1 Hz and 60 Hz
 filter_raw = raw.filter(l_freq=.1, h_freq=60, fir_window='hamming', method='fir')
@@ -59,7 +59,7 @@ ica = ICA(n_components=n_components, method=method)
 ica.fit(filter_raw.copy().filter(l_freq=1, h_freq=60))
 
 # Save ICA
-ica.save('file_directory/ica/sub' + sub + '-ica.fif', overwrite=True)
+ica.save(path + 'ica/sub' + sub + '-ica.fif', overwrite=True)
 
 # Plot all ica components as topomaps and their respective time course contributions
 ica.plot_components()
@@ -104,4 +104,4 @@ epochs = epochs.drop_bad(reject=reject)
 epochs.plot_drop_log()
 
 # Save data
-reconst_raw.save('file_directory/raw/sub' + sub + '-raw.fif', overwrite=True)
+reconst_raw.save(path + 'raw/sub' + sub + '-raw.fif', overwrite=True)
