@@ -26,7 +26,7 @@ subNr = len(subs)
 # Create dummy of tf object
 rdata = np.random.randn(subNr, chNr, samples)
 
-epochs=mne.read_epochs(path + '/epochs/sub01_tf64-epo.fif')
+epochs=mne.read_epochs(path + 'epochs/sub01_tf64-epo.fif')
 info=epochs.pick_types(meg=False, eeg=True, ref_meg=False).info
 
 # Create events for dummy epochs
@@ -81,7 +81,7 @@ for condName in conditions:
                 c = c + 1
 
             tfr_ave.data = my_array
-            tfr_ave.save(path + '/tf/sub' + sub + '_' + condName + '_' + powtype + '-tfr.h5', overwrite=True)
+            tfr_ave.save(path + 'tf/sub' + sub + '_' + condName + '_' + powtype + '-tfr.h5', overwrite=True)
 
             my_subs_array[s, :, :, :] = my_array
             my_array = np.zeros(shape=(chNr, 50, samples))
@@ -89,4 +89,4 @@ for condName in conditions:
             s = s + 1
 
         tfr_ave.data = np.mean(my_subs_array, axis=0)
-        tfr_ave.save(path + '/tf/' + condName + '_' + powtype + '-tfr.h5', overwrite=True)
+        tfr_ave.save(path + 'tf/' + condName + '_' + powtype + '-tfr.h5', overwrite=True)
