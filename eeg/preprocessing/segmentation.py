@@ -9,6 +9,8 @@ import numpy as np
 
 subs = []
 
+path = 'file_directory'
+
 # Just the starting location
 event_id = {'move_to_p1': 1}
 
@@ -17,10 +19,10 @@ reject = dict(eeg=150e-6) # 100 microV
 for sub in subs:
 
     # Load the cleaned raw data
-    raw = mne.io.read_raw('file_directory/raw/sub' + sub + '-raw.fif', preload=True)
+    raw = mne.io.read_raw(path + 'raw/sub' + sub + '-raw.fif', preload=True)
 
     # Load the re-coded events
-    events = mne.read_events('file_directory/events/events' + sub + '-recoded-eve.fif')
+    events = mne.read_events(path + 'events/events' + sub + '-recoded-eve.fif')
 
     # Set the channel types for the EOG
     raw.set_channel_types({'V': 'eog', 'F9': 'eeg', 'F10': 'eeg'})
@@ -32,7 +34,7 @@ for sub in subs:
     # Remove epochs exceeding threshold
     epochs = epochs.drop_bad(reject=reject)
 
-    epochs.save('file_directory/epochs/go/sub' + sub + '-epo.fif', overwrite=True)
+    epochs.save(path + 'epochs/go/sub' + sub + '-epo.fif', overwrite=True)
 
 event_id = {'recall_p1': 91, 'recall_p2': 92, 'recall_p3': 93, 'recall_p4': 94, 'recall_p5': 95, 
             'recall_p6': 96, 'recall_p7': 97, 'recall_p8': 98, 'recall_p9': 99, 'recall_p10': 100,
@@ -49,8 +51,8 @@ reject = dict(eeg=150e-6) # 100 microV
 
 for sub in subs:
 
-    raw = mne.io.read_raw('file_directory/raw/sub' + sub + '-raw.fif', preload=True)
-    events = mne.read_events('file_directory/events/events' + sub + '-recoded-eve.fif')
+    raw = mne.io.read_raw(path + 'raw/sub' + sub + '-raw.fif', preload=True)
+    events = mne.read_events(path + 'events/events' + sub + '-recoded-eve.fif')
     raw.set_channel_types({'V': 'eog', 'F9': 'eeg', 'F10': 'eeg'})
 
     # Merge events together for the no reward cues
@@ -65,7 +67,7 @@ for sub in subs:
 
     epochs = epochs.drop_bad(reject=reject)
 
-    epochs.save('file_directory/epochs/gencodingo/sub' + sub + '-epo.fif', overwrite=True)
+    epochs.save(path + 'epochs/gencodingo/sub' + sub + '-epo.fif', overwrite=True)
 
 ########################
 # Target vs. distractor pillars during recall stage
@@ -75,13 +77,13 @@ event_id = {'target_p1': 401, 'target_p2': 402, 'target_p3': 403, 'target_p4': 4
 
 for sub in subs:
 
-    raw = mne.io.read_raw('file_directory/raw/sub' + sub + '-raw.fif', preload=True)
+    raw = mne.io.read_raw(path + 'raw/sub' + sub + '-raw.fif', preload=True)
     raw.set_channel_types({'V': 'eog', 'F9': 'eeg', 'F10': 'eeg'})
 
-    events = mne.read_events('file_directory/events/events' + sub + '-recall-targetdist-eve.fif')
+    events = mne.read_events(path + 'events/events' + sub + '-recall-targetdist-eve.fif')
     epochs = mne.Epochs(raw, events, event_id, tmin=-2.5, tmax=2.5, baseline=None, preload=True,
                         on_missing='ignore')
 
     epochs = epochs.drop_bad(reject=reject)
 
-    epochs.save('file_directory/epochs/recall/sub' + sub + '_tf-epo.fif', overwrite=True)
+    epochs.save(path + 'epochs/recall/sub' + sub + '_tf-epo.fif', overwrite=True)
