@@ -9,6 +9,8 @@ import numpy as np
 # Build a list of strings for all used subjects
 subs = []
 
+path = 'file_directory'
+
 # The task events in the eprime code do not directly reflect which events during the recall
 # were the reward pillar during the previous encoding stage and whether those were correctly identified.
 # This first loop is for accurate identification of reward and no reward cue locations
@@ -16,7 +18,7 @@ subs = []
 for sub in subs:
 
     # Read event files
-    events = mne.read_events('file_directory/events/events' + sub + '-eve.fif')
+    events = mne.read_events(path + 'events/events' + sub + '-eve.fif')
 
     # Create empty running variables to be updated
     reward = 0
@@ -192,7 +194,7 @@ for sub in subs:
     print('Suject ' + sub + ', trials: ' + trialnr)
 
     # Save the new events
-    mne.write_events('file_directory/events/events' + sub + '-recoded-eve.fif',
+    mne.write_events(path + 'events/events' + sub + '-recoded-eve.fif',
                      events, overwrite=True)
 
 
@@ -205,7 +207,7 @@ subs.remove('27')
 
 for sub in subs:
 
-    events = mne.read_events('file_directory/events/events' +
+    events = mne.read_events(path + 'events/events' +
                              sub + '-recoded-eve.fif')
 
     for line in np.arange(0, len(events)):
@@ -221,7 +223,7 @@ for sub in subs:
         elif 251 in events[line:line + 45, 2] and events[line, 2] == 55:
             events[line, 2] = 355 # correct recognition pillar 5
 
-    mne.write_events('file_directory/events/events' + sub +
+    mne.write_events(path + 'events/events' + sub +
                      '-encoding-hitmiss-eve.fif', events, overwrite=True)
 
 # This loop uses the same approach as the first, but specifically separates
@@ -234,7 +236,7 @@ subs.remove('27')
 
 for sub in subs:
 
-    events = mne.read_events('file_directory/events/events' + sub + '-eve.fif')
+    events = mne.read_events(path + 'events/events' + sub + '-eve.fif')
 
     reward = 0
     listType = 0
@@ -312,5 +314,5 @@ for sub in subs:
                 (listType == 4 and reward != 5 and events[line, 2] == 96):
             events[line, 2] = 415  # distractor p5
 
-    mne.write_events('file_directory/events/events' + sub +
+    mne.write_events(path + 'events/events' + sub +
                      '-recall-targetdist-eve.fif', events, overwrite=True)
