@@ -211,4 +211,4 @@ for sub in subs:
     allSub = pd.concat([allSub, events], axis=0)
 
 # Save the data frame to a csv file
-allSub.to_csv(path + 'sdt_results.csv', index=False)
+allSub.to_csv(path + 'behavior/sdt_results.csv', index=False)
